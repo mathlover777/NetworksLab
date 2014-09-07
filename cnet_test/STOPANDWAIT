@@ -1,0 +1,19 @@
+compile = "stopandwait.c"
+
+
+messagerate         = 1000ms,
+propagationdelay    = 700ms,
+probframecorrupt    = 2
+
+host Peoria {
+    x=80,    y=50
+    winx=10, winy=200
+    link to Chicago {
+	propagationdelay = 450ms
+    }
+}
+host Chicago {
+    winx=580, winy=200
+    east east east of Peoria
+    link to Peoria
+}

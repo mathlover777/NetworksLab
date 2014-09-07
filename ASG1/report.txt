@@ -1,0 +1,112 @@
+Networks Lab
+Assignment 1
+______________
+
+Sourav Sarkar - 11CS30037
+
+______________
+
+Part 1
+______________
+
+Inputs:-
+
+1. Maximum Frequency (fMax)
+2. Maximum amplitude of signal (A)
+3. Number of sinusoidal waves (nComp)
+4. Max noise (eMax)
+5. Sampling Rate (fSample)
+
+Process:-
+
+1. 'n' sinusoidal waves are randomly generated with 'A' as their maximum amplitude. 
+2. Then they are superimposed to generate one sine wave and it is plotted with a very high
+sampling frequency to get a continuous feeling while showing the plot.
+3. This wave is then sampled at the given sampling rate 'fSample'.
+4. The wave is quantized as follows: the number of quantization levels and quantization width is chosen on the basis of the maximum noise such that quantization levels do not change after the noise is added to wave.The number of level is computed as l = (A * nComp /eMax); 
+5. Random positive or negative Noise is added to the wave to simulate its transmission.
+6. The wave is then re-quantized according to the old requantization levels.As the noise was set within the quantization level distance we get the same signal that we created before transmission.
+7. The wave is then reconstructed by Cubic Spline Interpolation.For this we installed the gsl library and used the same code that was provided with the assignment.
+8. Then the mean square error is calculated between the reconstructed signal and the original signal.
+
+Outputs:-
+plots are automatically shown when the code is run.
+
+Observation:
+	Enter Fmax : 100
+
+	Enter Maximum Amplitude : 1
+
+	Enter Number of Components : 5
+
+	Enter Sampling Freq : 4000
+
+	Enter Maximum Error : .1
+
+	Enter Length : .5
+
+	FREQ[0] = 84.018772 AMP[0] = 0.394383
+	FREQ[1] = 78.309922 AMP[1] = 0.798440
+	FREQ[2] = 91.164736 AMP[2] = 0.197551
+	FREQ[3] = 33.522276 AMP[3] = 0.768230
+	FREQ[4] = 27.777471 AMP[4] = 0.553970
+	ERROR = 0.000739
+
+	It is observed that when the sampling frequency is well above 2*fMax proper reconstruction is possible and mean square error is also very less.
+	
+______________
+
+Part 2
+______________
+
+1. Maximum Frequency (fMax)
+2. Maximum amplitude of signal (A)
+3. Number of sinusoidal waves (nComp)
+4. Max noise (eMax)
+
+Process:-
+
+This part uses Part 1 to give an estimate of fMax.
+
+The sampling frequency is varied and the corresponding mean square errors are calculated for different values of the sampling frequency and plotted.
+
+From the plot we estimate fMax from the point the Mean Square Error shows a rapid increase.To implement this we have seen from the error data the frequency where the change of error is maximum.
+
+
+Observation:
+
+	Enter Fmax : 100
+
+	Enter Maximum Amplitude : 10
+
+	Enter Number of Components : 5
+
+	Enter Maximum Error : 1
+
+	Enter Length : .5
+
+	FREQ[0] = 10.317119 AMP[0] = 1.260753
+	FREQ[1] = 49.544407 AMP[1] = 7.604752
+	FREQ[2] = 98.475167 AMP[2] = 9.350040
+	FREQ[3] = 68.444502 AMP[3] = 3.831883
+	FREQ[4] = 74.977088 AMP[4] = 3.686635
+	original created
+
+	Fmax = 99.000000
+
+	Hence our program predicts fMax as 99Hz and that is actually 98.475 Hz which is quite accurate.
+
+	Outputs:
+	plots are automatically shown when the code is run
+
+
+____________________________________
+to compile : 
+
+g++ asg1.c -o asg1 `pkg-config --cflags --libs gsl`
+
+____________________________________
+to run
+
+./asg1
+

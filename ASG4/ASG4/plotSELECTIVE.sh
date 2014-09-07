@@ -1,0 +1,1 @@
+gnuplot -e "splot \"resultSelectiveARQ\" with linespoints" -persist

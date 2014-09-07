@@ -1,0 +1,1 @@
+gnuplot -e "splot \"resultGoBackN\" with linespoints" -persist

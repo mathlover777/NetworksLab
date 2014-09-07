@@ -1,0 +1,9 @@
+compile = "goBackN.c"
+bandwidth = 10Mbps,
+propagationdelay = 400usecs,
+probframecorrupt = 2,
+host sender {
+   link to receiver
+}
+host receiver {
+}

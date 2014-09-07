@@ -1,0 +1,161 @@
+Assignment 4
+
+Sourav Sarkar	11CS30037
+
+
+Implemented the following:
+
+1)Development of simulation framwork using cnet library for simulating the ARQ protocols described:
+	In this assignment we have implemented the simpleARQ,Sliding1Bit,GoBackN and selectiveReject Protocols of the data link layer transmission.
+
+	For this we have used cnet library. All the Cnet programs use event handlers -  app_ready,physical_ready,wait and record_result.The record_result is used to save the statistics after execution.The physical_ready event handler is used to get data from physical layer and app_ready is used to take and give data to application levels
+
+
+2)Throughput achieved by the protocol is determined for all protocols
+	with the help of the record_result handler we have saved the throughput data in files.
+
+3)p and the window sizes on the throughput are varied and the results are depicted graphically in three separate 3-D plot data files.
+	Here We have varied the corrupt probability from 1/2 to 1/2^10 and also varied the window size from 4 to 64. So for GoBackN and selectiveReject we vary them both and we got a 3D plot.For Sliding1Bit we varied the probability and found a 2D plot.
+
+4) Observation:
+	i> For the simple ARQ protocol, the protocol fails if the timeout is less than the propagation time of the frame.So we have taken the timeout much larger than the propagation delay
+
+	ii> For Sliding1Bit if we increase corrupt probability we saw the throughput to decrease
+
+	iii and iv> For goBackN and seectiveReject we found the throughput to decrease if we increase corrupt probability and to increase linearly if we increase the windowsize
+
+
+Failure Conditions of the Protocols:
+
+We have also identified the following depending on our experimentations.
+
+1>For the simple ARQ protocol, the protocol fails if the timeout is less than the propagation time of the frame
+
+2>For the selective repeat ARQ protocol, the protocol fails if the number of pending frames exceeds MaxSeq/2.
+
+3> If too many frames are allowed to wait on the sender window then there may be two issues.First of all, Too many acknowlegdement will be required so the protocol may fail and also if too many are wating then suppose two acknowledgements say a1 and a2(for f1 and f2 f2 > f1) are sent by the receiver.And suppose a2 reaches and the window slides and suppose some new frame's (f3) index in window is same as f1 in the new window position.So if now a1 arrives then we have got a false acknowledgement which may leed the protocol to failure.
+
+
+LINK TO PLOTS :
+
+https://drive.google.com/folderview?id=0B9bJyZCySAkYODVTM2lRR1haMHM&usp=sharing
+
+
+Results Of Experiments : 
+
+1> SLIDING 1 BIT PROTOCOL :
+------------------------------------------
+ERROR PROBABILITY   	THROUGHPUT
+------------------------------------------
+	0.500000			512.000000
+	0.250000			654.222222
+	0.125000			485.052632
+	0.062500			455.111111
+	0.031250			692.705882
+	0.015625			512.000000
+	0.007812			592.842105
+	0.003906			654.222222
+	0.001953			512.000000
+	0.000977			426.666667
+
+So experimentally it seems that for error probability .031250 the protocol gives optimal result.
+
+2> GOBACK N PROTOCOL :
+-------------------------------------------------------
+ERROR PROBABILiTY  WINDOWSIZE   		THROUGHPUT 
+-------------------------------------------------------
+0.500000				2				0.000000
+0.500000				4				0.000000
+0.500000				8				455.111111
+0.500000				16				431.157895
+0.500000				32				361.411765
+0.500000				64				451.764706
+0.500000				128				341.333333
+0.250000				2				256.000000
+0.250000				4				284.444444
+0.250000				8				540.444444
+0.250000				16				320.000000
+0.250000				32				323.368421
+0.250000				64				540.444444
+0.250000				128				597.333333
+0.125000				2				455.111111
+0.125000				4				654.222222
+0.125000				8				341.333333
+0.125000				16				597.333333
+0.125000				32				352.000000
+0.125000				64				483.555556
+0.125000				128				540.444444
+0.062500				2				538.947368
+0.062500				4				597.333333
+0.062500				8				455.111111
+0.062500				16				796.444444
+0.062500				32				485.052632
+0.062500				64				568.888889
+0.062500				128				662.588235
+0.031250				2				512.000000
+0.031250				4				619.789474
+0.031250				8				654.222222
+0.031250				16				538.947368
+0.031250				32				483.555556
+0.031250				64				546.133333
+0.031250				128				727.578947
+
+So experimentally it seems that for for 16-64 bit window size range the protol gives better results
+
+3>SELECTIVE REJECT PROTOCOL :
+-------------------------------------------------------
+ERROR PROBABILiTY  WINDOWSIZE   		THROUGHPUT 
+-------------------------------------------------------
+0.500000				2				0.000000
+0.500000				4				416.000000
+0.500000				8				242.526316
+0.500000				16				199.111111
+0.500000				32				341.333333
+0.500000				64				90.352941
+0.500000				128				30.117647
+0.250000				2				30.117647
+0.250000				4				455.111111
+0.250000				8				273.066667
+0.250000				16				296.421053
+0.250000				32				682.666667
+0.250000				64				53.894737
+0.250000				128				483.555556
+0.125000				2				341.333333
+0.125000				4				458.105263
+0.125000				8				654.222222
+0.125000				16				312.888889
+0.125000				32				632.470588
+0.125000				64				597.333333
+0.125000				128				431.157895
+0.062500				2				128.000000
+0.062500				4				323.368421
+0.062500				8				455.111111
+0.062500				16				483.555556
+0.062500				32				483.555556
+0.062500				64				625.777778
+0.062500				128				227.555556
+0.031250				2				269.473684
+0.031250				4				768.000000
+0.031250				8				421.647059
+0.031250				16				512.000000
+0.031250				32				632.470588
+0.031250				64				431.157895
+0.031250				128				369.777778
+
+So experimentally it seems that the protocol gives better results for 32-64 bit window size
+
+TO RUN :
+g++ sliding1bittest.c -o sliding1bittest
+sliding1bittest
+./plotSLIDING.sh
+
+g++ gobackntest.c -o gobackntest
+gobackntest
+./plotGOBACKN.sh
+
+g++ selectivearqtest.c -o selectivearqtest
+selectivearqtest
+./plotSELECTIVE.sh
+
+the last 2 plots are 3d plots plotted with gnuplots splot command
+

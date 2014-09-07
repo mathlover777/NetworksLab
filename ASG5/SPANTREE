@@ -1,0 +1,91 @@
+compile = "spantree.c"
+bandwidth		= 56Kbps,
+propagationdelay    = 2500ms,
+
+host Bridge1
+{	
+	x=200
+	y=400
+	link to Bridge2
+	link to Bridge3
+	link to Bridge4
+	link to Bridge5
+}
+
+host Bridge2
+{
+	x=100
+	y=300
+	link to Bridge1
+	link to Bridge8
+	
+}
+
+host Bridge3
+{	
+	x=300
+	y=300	
+	link to Bridge1
+	link to Bridge9
+	link to Bridge8
+}
+
+host Bridge5
+{
+	x=300
+	y=500
+	link to Bridge1	
+}
+
+host Bridge4
+{
+	x=100
+	y=500
+	link to Bridge1
+	link to Bridge6
+	link to Bridge7
+}
+
+host Bridge6
+{
+	x=100
+	y=600	
+	link to Bridge4	
+	link to Bridge7
+}
+
+host Bridge7
+{
+	x=200
+	y=600
+	link to Bridge4
+	link to Bridge6
+	
+}
+
+host Bridge8
+{
+	x=100
+	y=200
+	link to Bridge2
+	link to Bridge3
+	link to Bridge10
+	
+}
+
+host Bridge9
+{
+	x=300
+	y=200
+	link to Bridge3
+	link to Bridge10
+}
+
+host Bridge10
+{
+	x=200
+	y=100
+	link to Bridge8
+	link to Bridge9
+}
+

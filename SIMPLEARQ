@@ -1,0 +1,16 @@
+compile             = "simpleARQ.c"
+
+bandwidth           = 10Mbps,
+
+propagationdelay    = 400usecs,
+
+probframeloss       = 5,
+probframecorrupt    = 5,
+
+host sender {
+    link to receiver
+}
+
+host receiver {
+    
+}

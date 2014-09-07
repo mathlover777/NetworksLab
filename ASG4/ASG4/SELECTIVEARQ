@@ -1,0 +1,9 @@
+compile = "selectiveARQ.c"
+bandwidth = 10Mbps,
+propagationdelay = 400usecs,
+probframecorrupt = 5,
+host sender {
+   link to receiver
+}
+host receiver {
+}

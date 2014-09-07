@@ -1,0 +1,39 @@
+Assignment 4
+
+Sourav Sarkar	11CS30037
+
+
+Implemented the following:
+
+1)Development of simulation framwork using cnet library for simulating the ARQ protocols described:
+	In this assignment we have implemented the simpleARQ,Sliding1Bit,GoBackN and selectiveReject Protocols of the data link layer transmission.
+
+	For this we have used cnet library. All the Cnet programs use event handlers -  app_ready,physical_ready,wait and record_result.The record_result is used to save the statistics after execution.The physical_ready event handler is used to get data from physical layer and app_ready is used to take and give data to application levels
+
+
+2)Throughput achieved by the protocol is determined for all protocols
+	with the help of the record_result handler we have saved the throughput data in files.
+
+3)p and the window sizes on the throughput are varied and the results are depicted graphically in three separate 3-D plot data files.
+	Here We have varied the corrupt probability from 1/2 to 1/2^10 and also varied the window size from 4 to 64. So for GoBackN and selectiveReject we vary them both and we got a 3D plot.For Sliding1Bit we varied the probability and found a 2D plot.
+
+4) Observation:
+	i> For the simple ARQ protocol, the protocol fails if the timeout is less than the propagation time of the frame.So we have taken the timeout much larger than the propagation delay
+
+	ii> For Sliding1Bit if we increase corrupt probability we saw the throughput to decrease
+
+	iii and iv> For goBackN and seectiveReject we found the throughput to decrease if we increase corrupt probability and to increase linearly if we increase the windowsize
+
+
+Failure Conditions of the Protocols:
+
+We have also identified the following depending on our experimentations.
+
+1>For the simple ARQ protocol, the protocol fails if the timeout is less than the propagation time of the frame
+
+2>For the selective repeat ARQ protocol, the protocol fails if the number of pending frames exceeds MaxSeq/2.
+
+LINK TO PLOTS :
+
+https://drive.google.com/folderview?id=0B9bJyZCySAkYODVTM2lRR1haMHM&usp=sharing
+

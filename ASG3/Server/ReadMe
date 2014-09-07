@@ -1,0 +1,17 @@
+ServerSide FILES:
+
+1> List of session
+
+format:
+name : "list.txt"
+no   name with path
+1    a.pdf
+2    /home/c.pdf
+
+2> Session status files for each concurrent session:
+
+name for session i ---> "session_i.sh"
+a direct script file .... may be executed by window id
+
+"./session_i.sh 0x3224234"
+ and window 0x3224234 will be updated with the changes...// currently session can not be modified .... 

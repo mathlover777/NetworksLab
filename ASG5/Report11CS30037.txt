@@ -1,0 +1,54 @@
+Assignment-5
+************
+
+SPANNING TREE PROTOCOL
+***********************
+Sourav Sarkar - 11CS30037
+
+In This assignment we have studied the spanning tree protocol in bridge based lan networks.
+
+Experimental Setup
+*******************
+1. The setup has 10 bridges numbered from 1 to 10. We define priority by bridge numbers i.e. bridge with lower ID has higher priority.
+
+2. We maintain an array consisting of the root port entry and the root node of every bridge.We also maintain the least distance from the root to that bridge.
+
+3. Initially, each bridge assumes itself to be the root bridge and the root port is set to 0 by default.
+
+4. The bridges send out BPDUs along their interfaces/ports.
+
+5. Each BPDU consists of the following information to facilitate root node identification.
+	a. The ID of the bridge sending out the BPDU
+	b. The root node entry for that bridge
+	c. The path cost of the packet from the root bridge
+	
+6.When a bridge receives a BPDU it first checks if the root bridge entry of the BPDU is of higher priority than its current root node entry.If so, it updates its own root node entry to the higher priority root node. It also sets its root port to the port through which it received the BPDU and updates the cost of the path from the root to the received BPDU cost + 1. On the other hand, if the received BPDU has a root node with lower priority than the current root node of the receiving bridge, the bridge neglects the BPDU. 
+
+7.The cost of a BPDU is initially set to 0 and increases by 1 at each hop.
+
+8.Whenever a BPDU is received by any bridge and the value of the root has been updated if necessary, the array is checked to see if the root node value is the same for all the bridges. If so, the root node has been uniqely identified across all the bridges and the bridges stop sending BPDUs.
+
+9.Now, for each bridge, the root bridge has been identified and the corresponding root ports and the minimum path costs from the root node to each bridge has been calculated. Now, the non-redundant links are identified as follows:
+
+	a. If a link is connected to the root port of a bridge, it must be non-redundant and is part of the spanning tree.
+	b. All links connected to the root bridge are part of the spanning tree.
+	c. All other links are treated as redundant and are disabled.
+
+10.The set of non-redundant links forms the spanning tree.
+
+
+Steps to run the code:
+***********************
+
+1. Type "cnet SPANTREE" in the terminal and press enter
+2. The exchange of BPDUs and updation of root nodes is printed in the terminal.
+3. the final identification of spanning tree links is stored in the file "results.txt"
+
+
+  
+  
+
+
+
+
+
